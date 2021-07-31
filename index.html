@@ -5,18 +5,20 @@
 	<link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body>
-	<h1>Shopping List</h1>
-	<p id="first">Get it done today</p>
-	<input id="userinput" type="text" placeholder="enter items">
-	<button id="enter">Enter</button>
-	<ul>
-		<li class="bold red" random="23">Notebook <button class="delete">Delete</button></li>
-		<li>Jello <button class="delete">Delete</button></li>
-		<li>Spinach <button class="delete">Delete</button></li>
-		<li>Rice <button class="delete">Delete</button></li>
-		<li>Birthday Cake <button class="delete">Delete</button></li>
-		<li>Candles <button class="delete">Delete</button></li>
-	</ul>
+	<div id="myDIV" class="header">
+  <h2>My To Do List</h2>
+  <input type="text" id="myInput" placeholder="Title...">
+  <span onclick="newElement()" class="addBtn">Add</span>
+</div>
+
+<ul id="myUL">
+  <li>Hit the gym</li>
+  <li class="checked">Pay bills</li>
+  <li>Meet George</li>
+  <li>Buy eggs</li>
+  <li>Read a book</li>
+  <li>Organize office</li>
+</ul>
 	<script type="text/javascript" src="script.js"></script>
 </body>
 </html>
