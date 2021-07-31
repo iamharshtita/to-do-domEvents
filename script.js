@@ -1,57 +1,55 @@
-var button = document.getElementById("enter");
-var input = document.getElementById("userinput");
-var ul = document.querySelector("ul");
-var deletebutton=document.getElementsByClassName("delete");
-
-//add event listener to first 6 btns in HTML file
-for(var i = 0; i < deletebutton.length; i++){
-	deletebutton[i].addEventListener("click", removeParent, false);
+// Create a "close" button and append it to each list item
+var myNodelist = document.getElementsByTagName("LI");
+var i;
+for (i = 0; i < myNodelist.length; i++) {
+  var span = document.createElement("SPAN");
+  var txt = document.createTextNode("\u00D7");
+  span.className = "close";
+  span.appendChild(txt);
+  myNodelist[i].appendChild(span);
 }
 
-
-//from StackOverflow:
-function removeParent(evt) {
-  evt.target.removeEventListener("click", removeParent, false);
-  evt.target.parentNode.remove();
-}
-function inputLength() {
-	return input.value.length;
-}
-
-function createListElement() {
-	var li = document.createElement("li");
-	var bt= document.createElement("button");
-	bt.appendChild(document.createTextNode("Delete"));
-	li.appendChild(document.createTextNode(`${input.value} `));
-	li.appendChild(bt);
-	ul.appendChild(li);
-	input.value = "";
+// Click on a close button to hide the current list item
+var close = document.getElementsByClassName("close");
+var i;
+for (i = 0; i < close.length; i++) {
+  close[i].onclick = function() {
+    var div = this.parentElement;
+    div.style.display = "none";
+  }
 }
 
-function addListAfterClick() {
-	if (inputLength() > 0) {
-		createListElement();
-	}
+// Add a "checked" symbol when clicking on a list item
+var list = document.querySelector('ul');
+list.addEventListener('click', function(ev) {
+  if (ev.target.tagName === 'LI') {
+    ev.target.classList.toggle('checked');
+  }
+}, false);
+
+// Create a new list item when clicking on the "Add" button
+function newElement() {
+  var li = document.createElement("li");
+  var inputValue = document.getElementById("myInput").value;
+  var t = document.createTextNode(inputValue);
+  li.appendChild(t);
+  if (inputValue === '') {
+    alert("You must write something!");
+  } else {
+    document.getElementById("myUL").appendChild(li);
+  }
+  document.getElementById("myInput").value = "";
+
+  var span = document.createElement("SPAN");
+  var txt = document.createTextNode("\u00D7");
+  span.className = "close";
+  span.appendChild(txt);
+  li.appendChild(span);
+
+  for (i = 0; i < close.length; i++) {
+    close[i].onclick = function() {
+      var div = this.parentElement;
+      div.style.display = "none";
+    }
+  }
 }
-
-function addListAfterKeypress(event) {
-	if (inputLength() > 0 && event.keyCode === 13) {
-		createListElement();
-	}
-}
-
-function toggling(){
-	for (var i = 0; i < ul.children.length; i++) {
-  ul.children[i].addEventListener("click", toggle);
-}
-function toggle() {
-  this.classList.toggle("done");
-}
-}
-
-
-
-button.addEventListener("click", addListAfterClick);
-
-input.addEventListener("keypress", addListAfterKeypress);
-toggling();
